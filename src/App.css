@@ -4,30 +4,34 @@
   color: white;
 }
 
-.App__Aside {
+/*.App__Aside {
   width: 50%;
   background-color: #66DAC7;
-}
+}*/
 
 .App__Form {
+  margin: auto;
   width: 50%;
+  height: 592px;
   background-color: #2E4158;
-  padding: 25px 40px;
-  overflow: auto;
+  padding: 25px 25px;
+  overflow: visible;
 }
 
 .PageSwitcher {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10%;
+  justify-content: center;
+  margin-bottom: 25px;
 }
 
 .PageSwitcher__Item {
+  flex: 1;
   background-color: #4C5D72;
   color: #9DA6B1;
-  padding: 10px 25px;
+  padding: 10px 15px;
   cursor: pointer;
-  font-size: .9em;
+  font-size: 1.5em;
+  font-weight: 500;
   border: none;
   outline: none;
   display: inline-block;
@@ -39,14 +43,14 @@
   color: white;
 }
 
-.PageSwitcher__Item:first-child {
+/*.PageSwitcher__Item:first-child {
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
 }
 .PageSwitcher__Item:last-child {
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-}
+}*/
 
 .FormCenter {
   margin-bottom: 100px;
@@ -77,7 +81,12 @@
 }
 
 .FormField {
-  margin-bottom: 40px;
+  margin-bottom: 25px;
+}
+
+.FormFieldCenter {
+  display: flex;
+  justify-content: center;
 }
 
 .FormField__Label {
@@ -108,10 +117,10 @@
   color: white;
   border: none;
   outline: none;
-  border-radius: 25px;
-  padding: 15px 70px;
-  font-size: .8em;
+  padding: 10px 70px;
+  font-size: 1.5em;
   font-weight: 500;
+  cursor:pointer;
 }
 
 .FormField__Link {
