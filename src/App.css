@@ -24,6 +24,14 @@
   margin-bottom: 25px;
 }
 
+.TabSwitcher {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.0em;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
 .PageSwitcher__Item {
   flex: 1;
   background-color: #4C5D72;
@@ -54,6 +62,23 @@
 
 .FormCenter {
   margin-bottom: 100px;
+}
+
+.FormDual {
+  margin-bottom: 100px;
+  display: flex;
+}
+
+.FormLeft {
+  flex: 1.1;
+  display: inline-block;
+}
+
+
+.FormRight {
+  flex: 2;
+  display: inline-block;
+  padding: 0% 5%;
 }
 
 .FormTitle {
@@ -148,4 +173,52 @@
   display: inline-block;
   padding-bottom: 2px;
   margin-left: 5px;
+}
+
+.btn-group Button {
+  background-color: #4C5D72;
+  border: 1px solid #4C5D72;
+  color: white;
+  font-size: 1.0em;
+  padding: 10px 25px;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+}
+
+.btn-group Button.active {
+  background-color: #5ED0C0;
+  border: 1px solid #5ED0C0;
+  color: white;
+}
+
+/*
+.btn-group button:not(:last-child) {
+  border-bottom: none;
+}
+*/
+
+/* Add a background color on hover 
+.btn-group button:hover {
+  background-color: #3e8e41;
+}*/
+
+textarea {
+  width: 100%;
+  margin-bottom: 25px;
+  resize: none;
+  border: none;
+  padding: 10px;
+}
+
+/*textarea::placeholder {
+  color: #616E7F;
+}*/
+
+.h1Container {
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: -60px;
 }
