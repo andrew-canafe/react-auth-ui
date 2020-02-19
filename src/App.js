@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
-import SignUpForm from './pages/SignUpForm';
-import LogInForm from './pages/LogInForm';
-import CreateTicketForm from './pages/CreateTicketForm';
-import TicketHistoryForm from './pages/TicketHistoryForm';
-import MyAccountForm from './pages/MyAccountForm';
-import './App.css';
+import React, { Component } from "react";
+import { HashRouter as Router, Route } from "react-router-dom";
+import SignUpForm from "./pages/SignUpForm";
+import LogInForm from "./pages/LogInForm";
+import CreateTicketForm from "./pages/CreateTicketForm";
+import TicketHistoryForm from "./pages/TicketHistoryForm";
+import MyAccountForm from "./pages/MyAccountForm";
+import "./App.css";
 
 class App extends Component {
   render() {

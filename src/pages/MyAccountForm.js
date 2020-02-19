@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { Route, NavLink } from 'react-router-dom';
-import axios from 'axios';
-import ChangeName from './ChangeName';
-import ChangeEmail from './ChangeEmail';
-import ChangePassword from './ChangePassword';
-import ChangeAddress from './ChangeAddress';
-import DeleteAccount from './DeleteAccount';
-import LogOut from './LogOut';
+import React, { Component } from "react";
+import { Route, NavLink } from "react-router-dom";
+import axios from "axios";
+import ChangeName from "./ChangeName";
+import ChangeEmail from "./ChangeEmail";
+import ChangePassword from "./ChangePassword";
+import ChangeAddress from "./ChangeAddress";
+import DeleteAccount from "./DeleteAccount";
+import LogOut from "./LogOut";
 
 class MyAccountForm extends Component {
   constructor() {
     super();
 
     this.state = {
-      problem_type: '',
-      additional_instructions: ''
+      problem_type: "",
+      additional_instructions: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,15 +35,15 @@ class MyAccountForm extends Component {
     e.preventDefault();
 
     axios({
-      method: 'post',
-      url: 'https://us-central1-maintenance-genie.cloudfunctions.net/api/login',
+      method: "post",
+      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/login",
       data: this.state,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" }
     })
       .then((res) => { console.log(res) })
       .catch((res) => { console.log(res) });
 
-    console.log('The form was submitted with the following data:');
+    console.log("The form was submitted with the following data:");
     console.log(this.state);
   }
 

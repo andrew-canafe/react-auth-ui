@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 class LogInForm extends Component {
   constructor() {
     super();
 
     this.state = {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,28 +28,28 @@ class LogInForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    console.log('Log in post:');
+    console.log("Log in post:");
     console.log(this.state);
     axios({
-      method: 'post',
-      url: 'https://us-central1-maintenance-genie.cloudfunctions.net/api/login',
+      method: "post",
+      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/login",
       data: this.state,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" }
     })
     .then((res) => {
-      console.log('Log in reponse:');
+      console.log("Log in reponse:");
       console.log(res);
 
       if (res.data.ticket) {
-        this.props.history.push('/createticket');
+        this.props.history.push("/createticket");
       }
     })
     .catch((res) => {
-      console.log('Log in error:');
+      console.log("Log in error:");
       console.log(res)
     });
 
-    this.props.history.push('/createticket');
+    this.props.history.push("/createticket");
   }
 
   render() {

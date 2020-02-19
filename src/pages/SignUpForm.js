@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { NavLink } from 'react-router-dom';
+import React, { Component } from "react";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 
-//axios.defaults.baseURL = 'https://us-central1-maintenance-genie.cloudfunctions.net/api';
+//axios.defaults.baseURL = "https://us-central1-maintenance-genie.cloudfunctions.net/api";
 class SignUpForm extends Component {
   constructor() {
     super();
 
     this.state = {
-      email: '',
-      password: '',
-      confirm_password: '',
-      full_name: '',
-      address: '',
+      email: "",
+      password: "",
+      confirm_password: "",
+      full_name: "",
+      address: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,17 +35,17 @@ class SignUpForm extends Component {
     console.log(this.state);
 
     axios({
-      method: 'post',
-      url: 'https://us-central1-maintenance-genie.cloudfunctions.net/api/signup',
+      method: "post",
+      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/signup",
       data: this.state,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" }
     })
     .then((res) => {
       console.log(res);
 
       console.log(res.token);
       if (res.data.token) {
-        this.props.history.push('/login');
+        this.props.history.push("/login");
       }
     })
     .catch((res) => { console.log(res) });

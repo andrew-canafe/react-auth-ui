@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 class CreateTicketForm extends Component {
   constructor() {
     super();
 
     this.state = {
-      description: ''
+      description: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -16,7 +16,7 @@ class CreateTicketForm extends Component {
   }
 
   handleChange(e) {
-    let target = document.getElementsByTagName('textarea')[0];
+    let target = document.getElementsByTagName("textarea")[0];
     let value = target.value;
     let name = target.name;
 
@@ -28,7 +28,7 @@ class CreateTicketForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    let target = document.getElementsByTagName('textarea')[0];
+    let target = document.getElementsByTagName("textarea")[0];
     let value = target.value;
     let name = target.name;
 
@@ -36,13 +36,13 @@ class CreateTicketForm extends Component {
       [name]: value
     });
 
-    console.log('Ticket post:');
+    console.log("Ticket post:");
     console.log({description: value});
     axios({
-      method: 'post',
-      url: 'https://us-central1-maintenance-genie.cloudfunctions.net/api/ASDF',
+      method: "post",
+      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/ASDF",
       data: this.state,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" }
     })
     .then((res) => { console.log(res) })
     .catch((res) => { console.log(res) });

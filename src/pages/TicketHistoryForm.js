@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 class TicketHistoryForm extends Component {
   constructor() {
     super();
 
     this.state = {
-      problem_type: '',
-      additional_instructions: ''
+      problem_type: "",
+      additional_instructions: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,15 +29,15 @@ class TicketHistoryForm extends Component {
     e.preventDefault();
 
     axios({
-      method: 'post',
-      url: 'https://us-central1-maintenance-genie.cloudfunctions.net/api/login',
+      method: "post",
+      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/login",
       data: this.state,
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" }
     })
       .then((res) => { console.log(res) })
       .catch((res) => { console.log(res) });
 
-    console.log('The form was submitted with the following data:');
+    console.log("The form was submitted with the following data:");
     console.log(this.state);
   }
 
