@@ -34,28 +34,21 @@ class SignUpForm extends Component {
 
     console.log(this.state);
 
-    /*var body = new FormData();
-    body.append('email', this.state.email);
-    body.append('password', this.state.password);
-    body.append('confirm_password', this.state.confirm_password);
-    body.append('full_name', this.state.full_name);*/
-    //body.append('address', this.state.address);
-
     axios({
       method: 'post',
       url: 'https://us-central1-maintenance-genie.cloudfunctions.net/api/signup',
       data: this.state,
       headers: { 'Content-Type': 'application/json' }
     })
-      .then((res) => { console.log(res) })
-      .catch((res) => { console.log(res) });
+    .then((res) => {
+      console.log(res);
 
-    /*axios.post('/signup', this.state)
-    .then((res) => {console.log(res)})
-    .catch((res) => {console.log(res)});*/
-
-    //console.log('The form was submitted with the following data:');
-    //console.log(this.state);
+      console.log(res.token);
+      if (res.data.token) {
+        this.props.history.push('/login');
+      }
+    })
+    .catch((res) => { console.log(res) });
   }
 
   render() {

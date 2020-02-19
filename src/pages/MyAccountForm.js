@@ -4,7 +4,7 @@ import axios from 'axios';
 import ChangeName from './ChangeName';
 import ChangeEmail from './ChangeEmail';
 import ChangePassword from './ChangePassword';
-import ChangeLocation from './ChangeLocation';
+import ChangeAddress from './ChangeAddress';
 import DeleteAccount from './DeleteAccount';
 import LogOut from './LogOut';
 
@@ -61,7 +61,7 @@ class MyAccountForm extends Component {
             <div className="TabSwitcher">
               <NavLink exact to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Log Out</NavLink>
               <NavLink to="/myaccount/changename" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Change Name</NavLink>
-              <NavLink to="/myaccount/changelocation" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Change Location</NavLink>
+              <NavLink to="/myaccount/changeaddress" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Change Address</NavLink>
               <NavLink to="/myaccount/changeemail" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Change Email</NavLink>
               <NavLink to="/myaccount/changepassword" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Change Password</NavLink>
               <NavLink to="/myaccount/deleteaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Delete Account</NavLink>
@@ -73,7 +73,7 @@ class MyAccountForm extends Component {
               </Route>
               <Route path="/myaccount/changename" component={ChangeName}>
               </Route>
-              <Route path="/myaccount/changelocation" component={ChangeLocation}>
+              <Route path="/myaccount/changeaddress" component={ChangeAddress}>
               </Route>
               <Route path="/myaccount/changeemail" component={ChangeEmail}>
               </Route>

@@ -175,7 +175,7 @@
   margin-left: 5px;
 }
 
-.btn-group Button {
+.btn-group button {
   background-color: #4C5D72;
   border: 1px solid #4C5D72;
   color: white;
@@ -186,7 +186,7 @@
   display: block;
 }
 
-.btn-group Button.active {
+.btn-group button.active {
   background-color: #5ED0C0;
   border: 1px solid #5ED0C0;
   color: white;

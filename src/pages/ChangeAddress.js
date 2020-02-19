@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class ChangeLocation extends Component {
+class ChangeAddress extends Component {
   constructor() {
     super();
 
@@ -49,11 +49,11 @@ class ChangeLocation extends Component {
         </div>
 
         <div className="FormFieldCenter">
-          <button className="FormField__Button mr-20">Change Location</button>
+          <button className="FormField__Button mr-20">Change Address</button>
         </div>
       </form>
     );
   }
 }
 
-export default ChangeLocation;
+export default ChangeAddress;

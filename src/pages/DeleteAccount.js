@@ -49,7 +49,7 @@ class DeleteAccount extends Component {
         </div>
 
         <div className="FormFieldCenter">
-          <button style={{'background-color': 'red'}} className="FormField__Button mr-20">Delete Account</button>
+          <button style={{'backgroundColor': 'red'}} className="FormField__Button mr-20">Delete Account</button>
         </div>
       </form>
     );

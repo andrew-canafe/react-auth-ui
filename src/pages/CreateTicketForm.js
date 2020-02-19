@@ -7,8 +7,7 @@ class CreateTicketForm extends Component {
     super();
 
     this.state = {
-      problem_type: '',
-      additional_instructions: ''
+      description: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,7 +16,7 @@ class CreateTicketForm extends Component {
   }
 
   handleChange(e) {
-    let target = e.target;
+    let target = document.getElementsByTagName('textarea')[0];
     let value = target.value;
     let name = target.name;
 
@@ -29,17 +28,24 @@ class CreateTicketForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
+    let target = document.getElementsByTagName('textarea')[0];
+    let value = target.value;
+    let name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+
+    console.log('Ticket post:');
+    console.log({description: value});
     axios({
       method: 'post',
-      url: 'https://us-central1-maintenance-genie.cloudfunctions.net/NavLinkpi/login',
+      url: 'https://us-central1-maintenance-genie.cloudfunctions.net/api/ASDF',
       data: this.state,
       headers: { 'Content-Type': 'application/json' }
     })
-      .then((res) => { console.log(res) })
-      .catch((res) => { console.log(res) });
-
-    console.log('The form was submitted with the following data:');
-    console.log(this.state);
+    .then((res) => { console.log(res) })
+    .catch((res) => { console.log(res) });
   }
 
   setActive(e) {

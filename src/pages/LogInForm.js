@@ -28,17 +28,28 @@ class LogInForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
+    console.log('Log in post:');
+    console.log(this.state);
     axios({
       method: 'post',
       url: 'https://us-central1-maintenance-genie.cloudfunctions.net/api/login',
       data: this.state,
       headers: { 'Content-Type': 'application/json' }
     })
-      .then((res) => { console.log(res) })
-      .catch((res) => { console.log(res) });
+    .then((res) => {
+      console.log('Log in reponse:');
+      console.log(res);
 
-    console.log('The form was submitted with the following data:');
-    console.log(this.state);
+      if (res.data.ticket) {
+        this.props.history.push('/createticket');
+      }
+    })
+    .catch((res) => {
+      console.log('Log in error:');
+      console.log(res)
+    });
+
+    this.props.history.push('/createticket');
   }
 
   render() {

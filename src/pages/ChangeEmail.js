@@ -45,7 +45,7 @@ class ChangeEmail extends Component {
       <form onSubmit={this.handleSubmit} className="FormFields">
         <div className="FormField">
           <label className="FormField__Label" htmlFor="email">Email Address</label>
-          <input type="email" id="email" className="FormField__Input" placeholder="Enter your email address" name="email" value={this.state.email} onChange={this.handleChange} />
+          <input type="email" id="email" className="FormField__Input" placeholder="Enter your new email address" name="email" value={this.state.email} onChange={this.handleChange} />
         </div>
 
         <div className="FormFieldCenter">

@@ -50,14 +50,11 @@ class TicketHistoryForm extends Component {
           <NavLink to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">My Account</NavLink>
         </div>
         <div className="FormCenter">
-          <textarea rows="3" disabled>
-            Ticket history 1
+          <textarea rows="3" disabled value="Ticket history 1">
           </textarea>
-          <textarea rows="3" disabled>
-            Ticket history 2
+          <textarea rows="3" disabled value="Ticket history 2">
           </textarea>
-          <textarea rows="3" disabled>
-            Ticket history 3
+          <textarea rows="3" disabled value="Ticket history 3">
           </textarea>
         </div>
       </div>
