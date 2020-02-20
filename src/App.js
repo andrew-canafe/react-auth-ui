@@ -6,15 +6,13 @@ import CreateTicketForm from "./pages/CreateTicketForm";
 import TicketHistoryForm from "./pages/TicketHistoryForm";
 import MyAccountForm from "./pages/MyAccountForm";
 import "./App.css";
+import generateAlert from "./pages/AlertMessage";
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <div className="h1Container">
-          <h1>Maintenance Genie</h1>
-        </div>
-        <Router basename="/react-auth-ui/">
+      <Router basename="/react-auth-ui/">
+        <div>
           <div className="App">
             <div className="App__Form">
               <Route exact path="/" component={SignUpForm}>
@@ -28,10 +26,11 @@ class App extends Component {
               <Route path="/myaccount" component={MyAccountForm}>
               </Route>
             </div>
-
           </div>
-        </Router>
-      </div>
+          <Route path="/" component={e => generateAlert()}>
+          </Route>
+        </div>
+      </Router>
     );
   }
 }

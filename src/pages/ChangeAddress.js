@@ -27,17 +27,22 @@ class ChangeAddress extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
+    let target = document.getElementById("address");
+    let value = target.value;
+
     axios({
       method: "post",
-      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/login",
-      data: this.state,
-      headers: { "Content-Type": "application/json" }
+      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/edit_account",
+      data: {
+        change_location: value
+      },
+      headers: {
+        "Authorization": "Bearer "+window.sessionStorage.token,
+        "Content-Type": "application/json"
+      }
     })
-      .then((res) => { console.log(res) })
-      .catch((res) => { console.log(res) });
-
-    console.log("The form was submitted with the following data:");
-    console.log(this.state);
+    .then((res) => { console.log(res) })
+    .catch((res) => { console.log(res) });
   }
 
   render() {

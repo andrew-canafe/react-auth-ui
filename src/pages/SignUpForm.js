@@ -39,16 +39,15 @@ class SignUpForm extends Component {
       url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/signup",
       data: this.state,
       headers: { "Content-Type": "application/json" }
-    })
-    .then((res) => {
-      console.log(res);
-
-      console.log(res.token);
-      if (res.data.token) {
-        this.props.history.push("/login");
+    }).then((res) => {
+      switch (res.status) {
+        case 201:
+          window.sessionStorage.setItem("error", "alert warning: Account created. Please request for account verification from your landlord.");
+          this.props.history.push("/login");
+          break;
+        default:
       }
-    })
-    .catch((res) => { console.log(res) });
+    }).catch((res) => { console.log(res)});
   }
 
   render() {

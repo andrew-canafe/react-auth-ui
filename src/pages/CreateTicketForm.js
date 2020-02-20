@@ -31,18 +31,18 @@ class CreateTicketForm extends Component {
     let target = document.getElementsByTagName("textarea")[0];
     let value = target.value;
     let name = target.name;
-
-    this.setState({
-      [name]: value
-    });
+    let authVal = "Bearer "+window.sessionStorage.token;
 
     console.log("Ticket post:");
-    console.log({description: value});
+    console.log(value);
     axios({
       method: "post",
-      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/ASDF",
-      data: this.state,
-      headers: { "Content-Type": "application/json" }
+      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/ticket",
+      data: {[name]: value},
+      headers: {
+        "Authorization": authVal,
+        "Content-Type": "application/json"
+      }
     })
     .then((res) => { console.log(res) })
     .catch((res) => { console.log(res) });

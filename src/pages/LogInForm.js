@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import "./AlertMessage";
 
 class LogInForm extends Component {
   constructor() {
@@ -28,8 +29,6 @@ class LogInForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    console.log("Log in post:");
-    console.log(this.state);
     axios({
       method: "post",
       url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/login",
@@ -39,8 +38,8 @@ class LogInForm extends Component {
     .then((res) => {
       console.log("Log in reponse:");
       console.log(res);
-
-      if (res.data.ticket) {
+      if (res.data.token) {
+        window.sessionStorage.setItem("token", res.data.token);
         this.props.history.push("/createticket");
       }
     })
@@ -48,8 +47,6 @@ class LogInForm extends Component {
       console.log("Log in error:");
       console.log(res)
     });
-
-    this.props.history.push("/createticket");
   }
 
   render() {
