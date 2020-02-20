@@ -8,7 +8,7 @@ import ChangeAddress from "./ChangeAddress";
 import DeleteAccount from "./DeleteAccount";
 import LogOut from "./LogOut";
 
-class MyAccountForm extends Component {
+class MyAccount extends Component {
   constructor() {
     super();
 
@@ -40,11 +40,8 @@ class MyAccountForm extends Component {
       data: this.state,
       headers: { "Content-Type": "application/json" }
     })
-      .then((res) => { console.log(res) })
-      .catch((res) => { console.log(res) });
-
-    console.log("The form was submitted with the following data:");
-    console.log(this.state);
+      .then((res) => { })
+      .catch((res) => { });
   }
 
   render() {
@@ -69,18 +66,18 @@ class MyAccountForm extends Component {
           </div>
 
           <div className="FormRight">
-              <Route exact path="/myaccount" component={LogOut}>
-              </Route>
-              <Route path="/myaccount/changename" component={ChangeName}>
-              </Route>
-              <Route path="/myaccount/changeaddress" component={ChangeAddress}>
-              </Route>
-              <Route path="/myaccount/changeemail" component={ChangeEmail}>
-              </Route>
-              <Route path="/myaccount/changepassword" component={ChangePassword}>
-              </Route>
-              <Route path="/myaccount/deleteaccount" component={DeleteAccount}>
-              </Route>
+            <Route exact path="/myaccount" component={LogOut}>
+            </Route>
+            <Route path="/myaccount/changename" component={ChangeName}>
+            </Route>
+            <Route path="/myaccount/changeaddress" component={ChangeAddress}>
+            </Route>
+            <Route path="/myaccount/changeemail" component={ChangeEmail}>
+            </Route>
+            <Route path="/myaccount/changepassword" component={ChangePassword}>
+            </Route>
+            <Route path="/myaccount/deleteaccount" component={DeleteAccount}>
+            </Route>
           </div>
         </div>
       </div>
@@ -88,4 +85,4 @@ class MyAccountForm extends Component {
   }
 }
 
-export default MyAccountForm;
+export default MyAccount;

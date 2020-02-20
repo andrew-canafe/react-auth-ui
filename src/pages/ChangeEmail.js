@@ -33,11 +33,8 @@ class ChangeEmail extends Component {
       data: this.state,
       headers: { "Content-Type": "application/json" }
     })
-      .then((res) => { console.log(res) })
-      .catch((res) => { console.log(res) });
-
-    console.log("The form was submitted with the following data:");
-    console.log(this.state);
+      .then((res) => { })
+      .catch((res) => { });
   }
 
   render() {

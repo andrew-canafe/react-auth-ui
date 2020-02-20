@@ -1,7 +1,6 @@
 import React from "react";
 
 function deleteMyself(e) {
-    console.log(e.target);
     var div = e.target.parentElement;
 
     // Set the opacity of div to 0 (transparent)

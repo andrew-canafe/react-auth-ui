@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import "./AlertMessage";
 
-class LogInForm extends Component {
+class LogIn extends Component {
   constructor() {
     super();
 
@@ -36,17 +36,12 @@ class LogInForm extends Component {
       headers: { "Content-Type": "application/json" }
     })
     .then((res) => {
-      console.log("Log in reponse:");
-      console.log(res);
       if (res.data.token) {
         window.sessionStorage.setItem("token", res.data.token);
         this.props.history.push("/createticket");
       }
     })
-    .catch((res) => {
-      console.log("Log in error:");
-      console.log(res)
-    });
+    .catch((res) => { });
   }
 
   render() {
@@ -78,4 +73,4 @@ class LogInForm extends Component {
   }
 }
 
-export default LogInForm;
+export default LogIn;

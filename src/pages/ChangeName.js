@@ -30,8 +30,6 @@ class ChangeName extends Component {
     let target = document.getElementById("full_name");
     let value = target.value;
 
-    console.log("Change full name:");
-    console.log(value);
     axios({
       method: "post",
       url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/edit_account",
@@ -43,8 +41,8 @@ class ChangeName extends Component {
         "Content-Type": "application/json"
       }
     })
-    .then((res) => { console.log(res) })
-    .catch((res) => { console.log(res) });
+    .then((res) => { })
+    .catch((res) => { });
   }
 
   render() {

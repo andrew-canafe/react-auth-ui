@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
-class TicketHistoryForm extends Component {
+class TicketHistory extends Component {
   constructor() {
     super();
 
@@ -40,7 +40,6 @@ class TicketHistoryForm extends Component {
         </div>
         <div className="FormCenter">
           {this.state.tickets.slice(0, 4).map((dat) => {
-            console.log(dat);
             let tmp = "NAME: "+dat.full_name+"\nADDRESS: "+dat.address+"\nDESCRIPTION: "+dat.description
             +(dat.complete_time ? "\nCOMPLETED: "+dat.complete_time: "\nSUBMITTED: "+dat.submit_time);
             return (<textarea key={dat.ticket_id} rows="4" disabled value={tmp}></textarea>);
@@ -51,4 +50,4 @@ class TicketHistoryForm extends Component {
   }
 }
 
-export default TicketHistoryForm;
+export default TicketHistory;

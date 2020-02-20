@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 
-class CreateTicketForm extends Component {
+class CreateTicket extends Component {
   constructor() {
     super();
 
@@ -33,8 +33,6 @@ class CreateTicketForm extends Component {
     let name = target.name;
     let authVal = "Bearer "+window.sessionStorage.token;
 
-    console.log("Ticket post:");
-    console.log(value);
     axios({
       method: "post",
       url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/ticket",
@@ -44,15 +42,14 @@ class CreateTicketForm extends Component {
         "Content-Type": "application/json"
       }
     })
-    .then((res) => { console.log(res) })
-    .catch((res) => { console.log(res) });
+    .then((res) => { })
+    .catch((res) => { });
   }
 
   setActive(e) {
     var current = document.getElementsByClassName("active");
     current[0].className = current[0].className.replace(" active", "");
 
-    console.log(e);
     e.className += " active";
   }
 
@@ -79,4 +76,4 @@ class CreateTicketForm extends Component {
   }
 }
 
-export default CreateTicketForm;
+export default CreateTicket;

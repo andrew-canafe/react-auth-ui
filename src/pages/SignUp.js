@@ -3,7 +3,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 //axios.defaults.baseURL = "https://us-central1-maintenance-genie.cloudfunctions.net/api";
-class SignUpForm extends Component {
+class SignUp extends Component {
   constructor() {
     super();
 
@@ -32,8 +32,6 @@ class SignUpForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    console.log(this.state);
-
     axios({
       method: "post",
       url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/signup",
@@ -47,7 +45,7 @@ class SignUpForm extends Component {
           break;
         default:
       }
-    }).catch((res) => { console.log(res)});
+    }).catch((res) => { });
   }
 
   render() {
@@ -90,4 +88,4 @@ class SignUpForm extends Component {
   }
 }
 
-export default SignUpForm;
+export default SignUp;

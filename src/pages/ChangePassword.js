@@ -44,8 +44,8 @@ class ChangePassword extends Component {
         "Content-Type": "application/json"
       }
     })
-    .then((res) => { console.log(res) })
-    .catch((res) => { console.log(res) });
+    .then((res) => { })
+    .catch((res) => { });
   }
 
   render() {
