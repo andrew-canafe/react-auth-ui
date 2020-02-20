@@ -1,14 +1,13 @@
 .App {
-  height: 660px;
+  height: 684px;
   display: flex;
   color: white;
-  margin-top: 40px;
+  margin-top: calc((100vh - 684px)/2);
 }
 
 .App__Form {
   margin: auto;
   width: 50%;
-  height: 660px;
   background-color: #2E4158;
   padding: 25px 25px 0px 25px;
   overflow: visible;
@@ -65,7 +64,28 @@
 .FormRight {
   flex: 2;
   display: inline-block;
-  padding: 0% 5%;
+  padding: 0px 0px 0px 25px;
+}
+
+.FormChain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.FormLink {
+  height:100px;
+  display: flex;
+  flex-direction: row;
+  margin: 0px 0px 25px 0px;
+}
+
+.FormLink button {
+  width:100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0px;
 }
 
 .FormTitle {
@@ -163,9 +183,8 @@
 }
 
 textarea {
-  height: 110%;
   width: 100%;
-  margin-bottom: 25px;
+  margin: 0px 0px 25px 0px;
   resize: none;
   border: none;
   padding: 10px;
@@ -214,4 +233,11 @@ h1 {
 
 .closebtn:hover {
   color: black;
+}
+
+img {
+  padding: 10px;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }

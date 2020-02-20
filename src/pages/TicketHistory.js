@@ -9,7 +9,9 @@ class TicketHistory extends Component {
     this.state = {
       tickets: []
     };
+  }
 
+  componentDidMount() {
     this.generateTickets().then((res) => {
       this.setState({
         tickets: res.data
@@ -38,12 +40,17 @@ class TicketHistory extends Component {
           <NavLink exact to="/tickethistory" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Ticket History</NavLink>
           <NavLink to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">My Account</NavLink>
         </div>
-        <div className="FormCenter">
-          {this.state.tickets.slice(0, 4).map((dat) => {
-            let tmp = "NAME: "+dat.full_name+"\nADDRESS: "+dat.address+"\nDESCRIPTION: "+dat.description
-            +(dat.complete_time ? "\nCOMPLETED: "+dat.complete_time: "\nSUBMITTED: "+dat.submit_time);
-            return (<textarea key={dat.ticket_id} rows="4" disabled value={tmp}></textarea>);
-          })}
+        <div className="FormDual">
+          <div className="FormChain">
+            {this.state.tickets.slice(0, 4).map((dat) => {
+              let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nDESCRIPTION: " + dat.description + (dat.complete_time ? "\nCOMPLETED: " + dat.complete_time : "\nSUBMITTED: " + dat.submit_time);
+              return (
+                <div key={dat.ticket_id} className="FormLink">
+                  <textarea disabled value={tmp}></textarea>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
