@@ -27,17 +27,25 @@ class ChangePassword extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
+    let target = document.getElementById("password");
+    let target2 = document.getElementById("confirm_password");
+    let value = target.value;
+    let value2 = target2.value;
+
     axios({
       method: "post",
-      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/login",
-      data: this.state,
-      headers: { "Content-Type": "application/json" }
+      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/edit_account",
+      data: {
+        change_password: value,
+        confirm_password: value2
+      },
+      headers: {
+        "Authorization": "Bearer "+window.sessionStorage.token,
+        "Content-Type": "application/json"
+      }
     })
-      .then((res) => { console.log(res) })
-      .catch((res) => { console.log(res) });
-
-    console.log("The form was submitted with the following data:");
-    console.log(this.state);
+    .then((res) => { console.log(res) })
+    .catch((res) => { console.log(res) });
   }
 
   render() {

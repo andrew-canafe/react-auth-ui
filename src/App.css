@@ -2,19 +2,15 @@
   height: 88vh;
   display: flex;
   color: white;
+  margin-top: 25px;
 }
-
-/*.App__Aside {
-  width: 50%;
-  background-color: #66DAC7;
-}*/
 
 .App__Form {
   margin: auto;
   width: 50%;
-  height: 592px;
+  height: 660px;
   background-color: #2E4158;
-  padding: 25px 25px;
+  padding: 25px 25px 0px 25px;
   overflow: visible;
 }
 
@@ -29,7 +25,6 @@
   flex-direction: column;
   font-size: 1.0em;
   justify-content: center;
-  margin-bottom: 25px;
 }
 
 .PageSwitcher__Item {
@@ -51,21 +46,12 @@
   color: white;
 }
 
-/*.PageSwitcher__Item:first-child {
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-}
-.PageSwitcher__Item:last-child {
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-}*/
-
 .FormCenter {
-  margin-bottom: 100px;
+  margin-bottom: 25px;
 }
 
 .FormDual {
-  margin-bottom: 100px;
+  margin-bottom: 25px;
   display: flex;
 }
 
@@ -73,7 +59,6 @@
   flex: 1.1;
   display: inline-block;
 }
-
 
 .FormRight {
   flex: 2;
@@ -175,40 +160,17 @@
   margin-left: 5px;
 }
 
-.btn-group button {
-  background-color: #4C5D72;
-  border: 1px solid #4C5D72;
-  color: white;
-  font-size: 1.0em;
-  padding: 10px 25px;
-  cursor: pointer;
-  width: 100%;
-  display: block;
-}
-
-.btn-group button.active {
-  background-color: #5ED0C0;
-  border: 1px solid #5ED0C0;
-  color: white;
-}
-
-/*
-.btn-group button:not(:last-child) {
-  border-bottom: none;
-}
-*/
-
-/* Add a background color on hover 
-.btn-group button:hover {
-  background-color: #3e8e41;
-}*/
-
 textarea {
+  height: 110%;
   width: 100%;
   margin-bottom: 25px;
   resize: none;
   border: none;
   padding: 10px;
+}
+
+textarea:last-child {
+  margin-bottom: 0px;
 }
 
 /*textarea::placeholder {
@@ -224,7 +186,7 @@ h1 {
 }
 
 .alert {
-  margin: 0 auto;
+  margin: auto auto;
   width: 50%;
   padding: 20px;
   background-color: #f44336;
