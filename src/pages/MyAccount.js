@@ -66,17 +66,17 @@ class MyAccount extends Component {
           </div>
 
           <div className="FormRight">
-            <Route exact path="/myaccount" component={LogOut}>
+            <Route exact path="/react-auth-ui/myaccount" component={LogOut}>
             </Route>
-            <Route path="/myaccount/changename" component={ChangeName}>
+            <Route path="/react-auth-ui/myaccount/changename" component={ChangeName}>
             </Route>
-            <Route path="/myaccount/changeaddress" component={ChangeAddress}>
+            <Route path="/react-auth-ui/myaccount/changeaddress" component={ChangeAddress}>
             </Route>
-            <Route path="/myaccount/changeemail" component={ChangeEmail}>
+            <Route path="/react-auth-ui/myaccount/changeemail" component={ChangeEmail}>
             </Route>
-            <Route path="/myaccount/changepassword" component={ChangePassword}>
+            <Route path="/react-auth-ui/myaccount/changepassword" component={ChangePassword}>
             </Route>
-            <Route path="/myaccount/deleteaccount" component={DeleteAccount}>
+            <Route path="/react-auth-ui/myaccount/deleteaccount" component={DeleteAccount}>
             </Route>
           </div>
         </div>
