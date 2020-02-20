@@ -175,10 +175,6 @@ textarea:last-child {
   margin-bottom: 0px;
 }
 
-/*textarea::placeholder {
-  color: #616E7F;
-}*/
-
 .h1Container {
   text-align: center;
 }
@@ -188,8 +184,8 @@ h1 {
 }
 
 .alert {
-  margin: auto;
-  width: 100%;
+  margin: 25px;
+  width: calc(100% - 50px);
   padding: 20px;
   background-color: #f44336;
   color: white;
