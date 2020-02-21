@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+import resolved from "./resolved.png";
+import inprogress from "./inprogress.png";
+import pending from "./pending.png";
 
 class TicketHistory extends Component {
   constructor() {
-    super();
+    super();  
 
     this.state = {
       tickets: []
@@ -43,12 +46,33 @@ class TicketHistory extends Component {
         <div className="FormDual">
           <div className="FormChain">
             {this.state.tickets ? this.state.tickets.slice(0, 4).map((dat) => {
-              let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nDESCRIPTION: " + dat.description + (dat.complete_time ? "\nCOMPLETED: " + dat.complete_time : "\nSUBMITTED: " + dat.submit_time);
-              return (
-                <div key={dat.ticket_id} className="FormLink">
-                  <textarea disabled value={tmp}></textarea>
-                </div>
-              );
+              if (dat && dat.ticket_id) {
+                let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nDESCRIPTION: " + dat.description + (dat.complete_time ? "\nCOMPLETED: " + dat.complete_time : "\nSUBMITTED: " + dat.submit_time);
+                if (dat.is_closed) {
+                  return (
+                    <div key={dat.ticket_id} className="FormLink">
+                      <button><img src={resolved} alt="Resolved"></img></button>
+                      <textarea disabled value={tmp}></textarea>
+                    </div>
+                  );
+                } else if (dat.is_assigned) {
+                  return (
+                    <div key={dat.ticket_id} className="FormLink">
+                      <button><img src={inprogress} alt="In Progress"></img></button>
+                      <textarea disabled value={tmp}></textarea>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div key={dat.ticket_id} className="FormLink">
+                      <button><img src={pending} alt="Pending"></img></button>
+                      <textarea disabled value={tmp}></textarea>
+                    </div>
+                  );
+                }
+              } else {
+                return null;
+              }
             }) : null}
           </div>
         </div>

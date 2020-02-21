@@ -7,6 +7,7 @@ import TicketHistory from "./pages/TicketHistory";
 import MyAccount from "./pages/MyAccount";
 import generateAlert from "./pages/AlertMessage";
 import PendingTickets from "./pages/PendingTickets";
+import AssignedTickets from "./pages/AssignedTickets";
 import "./App.css";
 
 class App extends Component {
@@ -27,6 +28,8 @@ class App extends Component {
               <Route path="/myaccount" component={MyAccount}>
               </Route>
               <Route path="/pendingtickets" component={PendingTickets}>
+              </Route>
+              <Route path="/assignedtickets" component={AssignedTickets}>
               </Route>
               <Route path="/" component={e => generateAlert()}>
               </Route>

@@ -31,19 +31,25 @@ class CreateTicket extends Component {
     let target = document.getElementsByTagName("textarea")[0];
     let value = target.value;
     let name = target.name;
-    let authVal = "Bearer "+window.sessionStorage.token;
+    let authVal = "Bearer " + window.sessionStorage.token;
 
     axios({
       method: "post",
       url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/ticket",
-      data: {[name]: value},
+      data: { [name]: value },
       headers: {
         "Authorization": authVal,
         "Content-Type": "application/json"
       }
-    })
-    .then((res) => { })
-    .catch((res) => { });
+    }).then((res) => {
+      switch (res.status) {
+        case 200:
+          window.sessionStorage.setItem("error", "alert success: Ticket created successfully.")
+          this.props.history.push("/tickethistory");
+          break;
+        default:
+      }
+    }).catch((res) => { });
   }
 
   setActive(e) {
@@ -63,7 +69,7 @@ class CreateTicket extends Component {
         </div>
         <div className="FormCenter">
           <form onSubmit={this.handleSubmit} className="FormFields">
-            <textarea rows="3" name="description" placeholder="Enter your problem description">
+            <textarea name="description" placeholder="Enter your problem description">
             </textarea>
 
             <div className="FormFieldCenter">

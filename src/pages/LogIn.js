@@ -36,8 +36,9 @@ class LogIn extends Component {
       headers: { "Content-Type": "application/json" }
     })
     .then((res) => {
-      if (res.data.token) {
+      if (res.data.token && res.data.user_type) {
         window.sessionStorage.setItem("token", res.data.token);
+        window.sessionStorage.setItem("user_type", res.data.user_type);
         this.props.history.push("/createticket");
       }
     })

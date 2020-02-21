@@ -26,18 +26,18 @@ class MyAccount extends Component {
       method: "get",
       url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/view_profile",
       headers: {
-        "Authorization": "Bearer "+window.sessionStorage.token,
+        "Authorization": "Bearer " + window.sessionStorage.token,
         "Content-Type": "application/json"
       }
     })
-    .then((res) => {
-      this.setState({
-        address: res.data.address,
-        email: res.data.email,
-        full_name: res.data.full_name
+      .then((res) => {
+        this.setState({
+          address: res.data.address,
+          email: res.data.email,
+          full_name: res.data.full_name
+        })
       })
-    })
-    .catch((res) => { });
+      .catch((res) => { });
   }
 
   handleSubmit(e) {
@@ -53,14 +53,30 @@ class MyAccount extends Component {
       .catch((res) => { });
   }
 
-  render() {
-    return (
-      <div>
+  generatePageSwitcher() {
+    if (window.sessionStorage.user_type === "tenant") {
+      return (
         <div className="PageSwitcher">
           <NavLink to="/createticket" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Create Ticket</NavLink>
           <NavLink to="/tickethistory" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Ticket History</NavLink>
           <NavLink to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">My Account</NavLink>
         </div>
+      );
+    } else if (window.sessionStorage.user_type === "worker") {
+      return (
+        <div className="PageSwitcher">
+          <NavLink to="/pendingtickets" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Pending Tickets</NavLink>
+          <NavLink to="/assignedtickets" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Assigned Tickets</NavLink>
+          <NavLink to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">My Account</NavLink>
+        </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        {this.generatePageSwitcher()}
 
         <div className="FormDual">
           <div className="FormLeft">
@@ -77,11 +93,11 @@ class MyAccount extends Component {
           <div className="FormRight">
             <Route exact path="/myaccount" component={LogOut}>
             </Route>
-            <Route path="/myaccount/changename" render={(props) => (<ChangeName {...props} full_name={this.state.full_name}/>)}>
+            <Route path="/myaccount/changename" render={(props) => (<ChangeName {...props} full_name={this.state.full_name} />)}>
             </Route>
-            <Route path="/myaccount/changeaddress" render={(props) => (<ChangeAddress {...props} address={this.state.address}/>)}>
+            <Route path="/myaccount/changeaddress" render={(props) => (<ChangeAddress {...props} address={this.state.address} />)}>
             </Route>
-            <Route path="/myaccount/viewemail" render={(props) => (<ViewEmail {...props} email={this.state.email}/>)}>
+            <Route path="/myaccount/viewemail" render={(props) => (<ViewEmail {...props} email={this.state.email} />)}>
             </Route>
             <Route path="/myaccount/changepassword" component={ChangePassword}>
             </Route>

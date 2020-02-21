@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-import pending from "./pending.png";
+import inprogress from "./inprogress.png";
+import resolved from "./resolved.png";
 
-class PendingTickets extends Component {
+class AssignedTickets extends Component {
     constructor() {
         super();
 
@@ -21,7 +22,7 @@ class PendingTickets extends Component {
     }
 
     generateTickets() {
-        return axios.get("https://us-central1-maintenance-genie.cloudfunctions.net/api/unassigned_tickets", {
+        return axios.get("https://us-central1-maintenance-genie.cloudfunctions.net/api/assigned_tickets", {
             headers: {
                 "Authorization": "Bearer " + window.sessionStorage.token,
                 "Content-Type": "application/json"
@@ -33,7 +34,7 @@ class PendingTickets extends Component {
         });
     }
 
-    assignTicket(e) {
+    closeTicket(e) {
         e.preventDefault();
 
         let target = e.currentTarget.parentElement;
@@ -41,14 +42,19 @@ class PendingTickets extends Component {
 
         axios({
             method: "post",
-            url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/assign_ticket/" + value,
+            url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/close_ticket/" + value,
             headers: {
                 "Authorization": "Bearer " + window.sessionStorage.token,
                 "Content-Type": "application/json"
             }
-        }).then((res) => { }).catch((res) => { });
-
-        target.remove();
+        }).then((res) => {
+            console.log(res);
+            switch (res.status) {
+                case 200:
+                    break;
+                default:
+            }
+        }).catch((res) => { });
     }
 
     render() {
@@ -64,12 +70,22 @@ class PendingTickets extends Component {
                         {this.state.tickets ? this.state.tickets.map((dat) => {
                             if (dat && dat.ticket_id) {
                                 let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nDESCRIPTION: " + dat.description + "\nSUBMITTED ON: " + dat.submit_time;
-                                return (
-                                    <div key={dat.ticket_id} className="FormLink" customkey={dat.ticket_id}>
-                                        <button onClick={this.assignTicket}><img src={pending} alt="Pending"></img></button>
-                                        <textarea disabled value={tmp}></textarea>
-                                    </div>
-                                );
+
+                                if (dat.is_closed) {
+                                    return (
+                                        <div key={dat.ticket_id} className="FormLink">
+                                            <button><img src={resolved} alt="Resolved"></img></button>
+                                            <textarea disabled value={tmp}></textarea>
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div key={dat.ticket_id} className="FormLink" customkey={dat.ticket_id}>
+                                            <button onClick={this.closeTicket}><img src={inprogress} alt="In Progress"></img></button>
+                                            <textarea disabled value={tmp}></textarea>
+                                        </div>
+                                    );
+                                }
                             } else {
                                 return null;
                             }
@@ -81,4 +97,4 @@ class PendingTickets extends Component {
     }
 }
 
-export default PendingTickets;
+export default AssignedTickets;

@@ -42,6 +42,7 @@ class LogOut extends Component {
       <form onSubmit={this.handleSubmit} className="FormFields">
         <div className="FormFieldCenter">
           <button className="FormField__Button mr-20" onClick={() => {
+            window.sessionStorage.removeItem("user_type");
             window.sessionStorage.removeItem("token");
             this.props.history.push("/login");
           }}>Confirm Log Out</button>
