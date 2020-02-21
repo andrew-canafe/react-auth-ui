@@ -35,21 +35,36 @@ class DeleteAccount extends Component {
         password: value
       },
       headers: {
-        "Authorization": "Bearer "+window.sessionStorage.token,
+        "Authorization": "Bearer " + window.sessionStorage.token,
         "Content-Type": "application/json"
       }
-    })
-    .then((res) => {
+    }).then((res) => {
       switch (res.status) {
         case 200:
-          window.sessionStorage.setItem("error", "alert success: Account successfully deleted.");
+          window.sessionStorage.setItem("error", "alert success: Account deleted.");
+          window.sessionStorage.removeItem("user_type");
+          window.sessionStorage.removeItem("token");
+          this.props.history.push("/login");
+          break;
+        case 403:
+          window.sessionStorage.setItem("error", "alert: Invalid credentials.");
+          window.sessionStorage.removeItem("user_type");
+          window.sessionStorage.removeItem("token");
+          this.props.history.push("/login");
+          break;
+        case 500:
+          window.sessionStorage.setItem("error", "alert: Internal server error.");
+          window.sessionStorage.removeItem("user_type");
           window.sessionStorage.removeItem("token");
           this.props.history.push("/login");
           break;
         default:
+          window.sessionStorage.setItem("error", "alert: Unrecognized error.");
+          window.sessionStorage.removeItem("user_type");
+          window.sessionStorage.removeItem("token");
+          this.props.history.push("/login");
       }
-    })
-    .catch((res) => { });
+    }).catch((res) => { });
   }
 
   render() {
@@ -57,11 +72,11 @@ class DeleteAccount extends Component {
       <form onSubmit={this.handleSubmit} className="FormFields">
         <div className="FormField">
           <label className="FormField__Label" htmlFor="password">Current Password</label>
-          <input type="password" id="password" className="FormField__Input" placeholder="Enter your current password" name="password"/>
+          <input type="password" id="password" className="FormField__Input" placeholder="Enter your current password" name="password" />
         </div>
 
         <div className="FormFieldCenter">
-          <button style={{"backgroundColor": "red"}} className="FormField__Button mr-20">Delete Account</button>
+          <button style={{ "backgroundColor": "red" }} className="FormField__Button mr-20">Delete Account</button>
         </div>
       </form>
     );

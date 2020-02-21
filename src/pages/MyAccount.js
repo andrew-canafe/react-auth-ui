@@ -54,19 +54,27 @@ class MyAccount extends Component {
   }
 
   generatePageSwitcher() {
-    if (window.sessionStorage.user_type === "tenant") {
-      return (
-        <div className="PageSwitcher">
-          <NavLink to="/createticket" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Create Ticket</NavLink>
-          <NavLink to="/tickethistory" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Ticket History</NavLink>
-          <NavLink to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">My Account</NavLink>
-        </div>
-      );
-    } else if (window.sessionStorage.user_type === "worker") {
+    if (window.sessionStorage.user_type === "worker") {
       return (
         <div className="PageSwitcher">
           <NavLink to="/pendingtickets" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Pending Tickets</NavLink>
           <NavLink to="/assignedtickets" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Assigned Tickets</NavLink>
+          <NavLink to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">My Account</NavLink>
+        </div>
+      );
+    } else if (window.sessionStorage.user_type === "landlord") {
+      return (
+        <div className="PageSwitcher">
+          <NavLink to="/unverifiedtenants" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Assign Tenants</NavLink>
+          <NavLink to="/unverifiedworkers" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Assign Workers</NavLink>
+          <NavLink to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">My Account</NavLink>
+        </div>
+      );
+    } else {
+      return (
+        <div className="PageSwitcher">
+          <NavLink to="/createticket" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Create Ticket</NavLink>
+          <NavLink to="/tickethistory" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Ticket History</NavLink>
           <NavLink to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">My Account</NavLink>
         </div>
       );

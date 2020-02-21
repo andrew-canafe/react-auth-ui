@@ -44,10 +44,34 @@ class CreateTicket extends Component {
     }).then((res) => {
       switch (res.status) {
         case 200:
-          window.sessionStorage.setItem("error", "alert success: Ticket created successfully.")
+          window.sessionStorage.setItem("error", "alert success: Ticket created successfully.");
           this.props.history.push("/tickethistory");
           break;
+        case 400:
+          window.sessionStorage.setItem("error", "alert: Invalid input.");
+          this.props.history.push("/createticket");
+          break;
+        case 401:
+          window.sessionStorage.setItem("error", "alert: Some fields left blank.");
+          this.props.history.push("/createticket");
+          break;
+        case 403:
+          window.sessionStorage.setItem("error", "alert: Invalid credentials.");
+          window.sessionStorage.removeItem("user_type");
+          window.sessionStorage.removeItem("token");
+          this.props.history.push("/login");
+          break;
+        case 500:
+          window.sessionStorage.setItem("error", "alert: Internal server error.");
+          window.sessionStorage.removeItem("user_type");
+          window.sessionStorage.removeItem("token");
+          this.props.history.push("/login");
+          break;
         default:
+          window.sessionStorage.setItem("error", "alert: Unrecognized error.");
+          window.sessionStorage.removeItem("user_type");
+          window.sessionStorage.removeItem("token");
+          this.props.history.push("/login");
       }
     }).catch((res) => { });
   }

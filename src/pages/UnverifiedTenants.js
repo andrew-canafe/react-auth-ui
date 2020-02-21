@@ -3,25 +3,25 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import pending from "./pending.png";
 
-class PendingTickets extends Component {
+class UnverifiedTenants extends Component {
     constructor() {
         super();
 
         this.state = {
-            tickets: []
+            users: []
         };
     }
 
     componentDidMount() {
-        this.generateTickets().then((res) => {
+        this.generateUsers().then((res) => {
             this.setState({
-                tickets: res.data
+                users: res.data
             });
         });
     }
 
-    generateTickets() {
-        return axios.get("https://us-central1-maintenance-genie.cloudfunctions.net/api/unassigned_tickets", {
+    generateUsers() {
+        return axios.get("https://us-central1-maintenance-genie.cloudfunctions.net/api/unverified_users", {
             headers: {
                 "Authorization": "Bearer " + window.sessionStorage.token,
                 "Content-Type": "application/json"
@@ -33,7 +33,7 @@ class PendingTickets extends Component {
         });
     }
 
-    assignTicket(e) {
+    verifyUser(e) {
         e.preventDefault();
 
         let target = e.currentTarget.parentElement;
@@ -41,7 +41,7 @@ class PendingTickets extends Component {
 
         axios({
             method: "post",
-            url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/assign_ticket/" + value,
+            url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/verify_tenant/"+value,
             headers: {
                 "Authorization": "Bearer " + window.sessionStorage.token,
                 "Content-Type": "application/json"
@@ -49,8 +49,8 @@ class PendingTickets extends Component {
         }).then((res) => {
             switch (res.status) {
                 case 200:
-                    window.sessionStorage.setItem("error", "alert success: Ticket accepted.");
-                    this.props.history.push("/assignedtickets");
+                    window.sessionStorage.setItem("error", "alert success: Tenant verified.");
+                    this.props.history.push("/unverifiedworkers");
                     break;
                 case 403:
                     window.sessionStorage.setItem("error", "alert: Invalid credentials.");
@@ -71,26 +71,25 @@ class PendingTickets extends Component {
                     this.props.history.push("/login");
             }
         }).catch((res) => { });
-
-        target.remove();
     }
 
     render() {
         return (
             <div>
                 <div className="PageSwitcher">
-                    <NavLink exact to="/pendingtickets" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Pending Tickets</NavLink>
-                    <NavLink exact to="/assignedtickets" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Assigned Tickets</NavLink>
+                    <NavLink exact to="/unverifiedtenants" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Assign Tenants</NavLink>
+                    <NavLink exact to="/unverifiedworkers" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Assign Workers</NavLink>
                     <NavLink to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">My Account</NavLink>
                 </div>
                 <div className="FormDual">
                     <div className="FormChain">
-                        {this.state.tickets ? this.state.tickets.map((dat) => {
-                            if (dat && dat.ticket_id) {
-                                let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nDESCRIPTION: " + dat.description + "\nSUBMITTED ON: " + dat.submit_time;
+                        {this.state.users ? this.state.users.map((dat) => {
+                            if (dat) {
+                                let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nEMAIL: " + dat.email + "\nCREATED ON: " + dat.created_at;
+
                                 return (
-                                    <div key={dat.ticket_id} className="FormLink" customkey={dat.ticket_id}>
-                                        <button onClick={this.assignTicket}><img src={pending} alt="Pending"></img></button>
+                                    <div key={dat.email} className="FormLink" customkey={dat.email}>
+                                        <button onClick={this.verifyUser}><img src={pending} alt="Pending"></img></button>
                                         <textarea disabled value={tmp}></textarea>
                                     </div>
                                 );
@@ -105,4 +104,4 @@ class PendingTickets extends Component {
     }
 }
 
-export default PendingTickets;
+export default UnverifiedTenants;

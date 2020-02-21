@@ -8,6 +8,8 @@ import MyAccount from "./pages/MyAccount";
 import generateAlert from "./pages/AlertMessage";
 import PendingTickets from "./pages/PendingTickets";
 import AssignedTickets from "./pages/AssignedTickets";
+import UnverifiedTenants from "./pages/UnverifiedTenants";
+import UnverifiedWorkers from "./pages/UnverifiedWorkers";
 import "./App.css";
 
 class App extends Component {
@@ -30,6 +32,10 @@ class App extends Component {
               <Route path="/pendingtickets" component={PendingTickets}>
               </Route>
               <Route path="/assignedtickets" component={AssignedTickets}>
+              </Route>
+              <Route path="/unverifiedtenants" component={UnverifiedTenants}>
+              </Route>
+              <Route path="/unverifiedworkers" component={UnverifiedWorkers}>
               </Route>
               <Route path="/" component={e => generateAlert()}>
               </Route>

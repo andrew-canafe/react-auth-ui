@@ -34,15 +34,59 @@ class LogIn extends Component {
       url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/login",
       data: this.state,
       headers: { "Content-Type": "application/json" }
-    })
-    .then((res) => {
-      if (res.data.token && res.data.user_type) {
-        window.sessionStorage.setItem("token", res.data.token);
-        window.sessionStorage.setItem("user_type", res.data.user_type);
-        this.props.history.push("/createticket");
+    }).then((res) => {
+      switch (res.status) {
+        case 200:
+          if (res.data.token && res.data.user_type) {
+            window.sessionStorage.setItem("error", "alert success: Login successful.")
+            window.sessionStorage.setItem("token", res.data.token);
+            window.sessionStorage.setItem("user_type", res.data.user_type);
+            if (res.data.user_type === "landlord") {
+              this.props.history.push("/unverifiedtenants");
+            } else if (res.data.user_type === "worker") {
+              this.props.history.push("/pendingtickets");
+            } else {
+              this.props.history.push("/createticket");
+            }
+          } else {
+            window.sessionStorage.setItem("error", "alert: Unrecognized error.");
+            window.sessionStorage.removeItem("user_type");
+            window.sessionStorage.removeItem("token");
+            this.props.history.push("/login");
+          }
+          break;
+        case 400:
+          window.sessionStorage.setItem("error", "alert: Invalid input.");
+          this.props.history.push("/login");
+          break;
+        case 401:
+          window.sessionStorage.setItem("error", "alert: Some fields left blank.");
+          this.props.history.push("/login");
+          break;
+        case 405:
+          window.sessionStorage.setItem("error", "alert: Invalid credentials.");
+          window.sessionStorage.removeItem("user_type");
+          window.sessionStorage.removeItem("token");
+          this.props.history.push("/login");
+          break;
+        case 500:
+          window.sessionStorage.setItem("error", "alert: Internal server error.");
+          window.sessionStorage.removeItem("user_type");
+          window.sessionStorage.removeItem("token");
+          this.props.history.push("/login");
+          break;
+        default:
+          window.sessionStorage.setItem("error", "alert: Unrecognized error.");
+          window.sessionStorage.removeItem("user_type");
+          window.sessionStorage.removeItem("token");
+          this.props.history.push("/login");
       }
-    })
-    .catch((res) => { });
+    }).catch((res) => {
+      window.sessionStorage.setItem("error", "alert: Invalid credentials.");
+      window.sessionStorage.removeItem("user_type");
+      window.sessionStorage.removeItem("token");
+      this.props.history.push("/login");
+    });
   }
 
   render() {
