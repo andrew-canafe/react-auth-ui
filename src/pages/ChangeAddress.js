@@ -50,7 +50,7 @@ class ChangeAddress extends Component {
       <form onSubmit={this.handleSubmit} className="FormFields">
         <div className="FormField">
           <label className="FormField__Label" htmlFor="address">Street Address</label>
-          <input type="text" id="address" className="FormField__Input" placeholder="Enter your new street address" name="address" value={this.state.name} onChange={this.handleChange} />
+          <input type="text" id="address" className="FormField__Input" placeholder="Enter your new street address" name="address" defaultValue={this.props.address ? this.props.address : ""} onChange={this.handleChange} />
         </div>
 
         <div className="FormFieldCenter">

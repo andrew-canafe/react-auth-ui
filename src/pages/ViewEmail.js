@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class ChangeEmail extends Component {
+class ViewEmail extends Component {
   constructor() {
     super();
 
     this.state = {
-      problem_type: "",
-      additional_instructions: ""
+      email: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,18 +38,14 @@ class ChangeEmail extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="FormFields">
+      <form className="FormFields">
         <div className="FormField">
           <label className="FormField__Label" htmlFor="email">Email Address</label>
-          <input type="email" id="email" className="FormField__Input" placeholder="Enter your new email address" name="email" value={this.state.email} onChange={this.handleChange} />
-        </div>
-
-        <div className="FormFieldCenter">
-          <button className="FormField__Button mr-20">Change Email</button>
+          <input disabled type="email" id="email" className="FormField__Input" placeholder="Your current email address" name="email" defaultValue={this.props.email ? this.props.email : ""}/>
         </div>
       </form>
     );
   }
 }
 
-export default ChangeEmail;
+export default ViewEmail;

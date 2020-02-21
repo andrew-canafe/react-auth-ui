@@ -19,28 +19,28 @@ function generateAlert () {
             return (
                 <div className="alert">
                 <span className="closebtn" onClick={(e) => deleteMyself(e)}>&times;</span>  
-                <strong>{tmp.replace("alert:", "")}</strong>
+                <strong>{tmp.replace("alert: ", "")}</strong>
                 </div>
             )
         } else if (tmp.includes("alert success:")) {
             return (
                 <div className="alert success">
                 <span className="closebtn" onClick={(e) => deleteMyself(e)}>&times;</span>  
-                <strong>{tmp.replace("alert success:", "")}</strong>
+                <strong>{tmp.replace("alert success: ", "")}</strong>
                 </div>
             )
         } else if (tmp.includes("alert info:")) {
             return (
                 <div className="alert info">
                 <span className="closebtn" onClick={(e) => deleteMyself(e)}>&times;</span>  
-                <strong>{tmp.replace("alert info:", "")}</strong>
+                <strong>{tmp.replace("alert info: ", "")}</strong>
                 </div>
             )
         } else if (tmp.includes("alert warning:")) {
             return (
                 <div className="alert warning">
                 <span className="closebtn" onClick={(e) => deleteMyself(e)}>&times;</span>  
-                <strong>{tmp.replace("alert warning:", "")}</strong>
+                <strong>{tmp.replace("alert warning: ", "")}</strong>
                 </div>
             )
         }

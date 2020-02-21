@@ -25,16 +25,31 @@ class DeleteAccount extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    let target = document.getElementById("password");
+    let value = target.value;
 
     axios({
       method: "post",
-      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/login",
-      data: this.state,
-      headers: { "Content-Type": "application/json" }
+      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/delete_account",
+      data: {
+        password: value
+      },
+      headers: {
+        "Authorization": "Bearer "+window.sessionStorage.token,
+        "Content-Type": "application/json"
+      }
     })
-      .then((res) => { })
-      .catch((res) => { });
+    .then((res) => {
+      switch (res.status) {
+        case 200:
+          window.sessionStorage.setItem("error", "alert success: Account successfully deleted.");
+          window.sessionStorage.removeItem("token");
+          this.props.history.push("/login");
+          break;
+        default:
+      }
+    })
+    .catch((res) => { });
   }
 
   render() {
@@ -42,7 +57,7 @@ class DeleteAccount extends Component {
       <form onSubmit={this.handleSubmit} className="FormFields">
         <div className="FormField">
           <label className="FormField__Label" htmlFor="password">Current Password</label>
-          <input type="password" id="password" className="FormField__Input" placeholder="Enter your current password" name="password" value={this.state.password} onChange={this.handleChange} />
+          <input type="password" id="password" className="FormField__Input" placeholder="Enter your current password" name="password"/>
         </div>
 
         <div className="FormFieldCenter">

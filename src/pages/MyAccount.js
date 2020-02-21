@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, NavLink } from "react-router-dom";
 import axios from "axios";
 import ChangeName from "./ChangeName";
-import ChangeEmail from "./ChangeEmail";
+import ViewEmail from "./ViewEmail";
 import ChangePassword from "./ChangePassword";
 import ChangeAddress from "./ChangeAddress";
 import DeleteAccount from "./DeleteAccount";
@@ -13,22 +13,31 @@ class MyAccount extends Component {
     super();
 
     this.state = {
-      problem_type: "",
-      additional_instructions: ""
+      address: "",
+      email: "",
+      full_name: ""
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(e) {
-    let target = e.target;
-    let value = target.value;
-    let name = target.name;
-
-    this.setState({
-      [name]: value
-    });
+  componentDidMount() {
+    axios({
+      method: "get",
+      url: "https://us-central1-maintenance-genie.cloudfunctions.net/api/view_profile",
+      headers: {
+        "Authorization": "Bearer "+window.sessionStorage.token,
+        "Content-Type": "application/json"
+      }
+    })
+    .then((res) => {
+      this.setState({
+        address: res.data.address,
+        email: res.data.email,
+        full_name: res.data.full_name
+      })
+    })
+    .catch((res) => { });
   }
 
   handleSubmit(e) {
@@ -59,7 +68,7 @@ class MyAccount extends Component {
               <NavLink exact to="/myaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Log Out</NavLink>
               <NavLink to="/myaccount/changename" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Change Name</NavLink>
               <NavLink to="/myaccount/changeaddress" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Change Address</NavLink>
-              <NavLink to="/myaccount/changeemail" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Change Email</NavLink>
+              <NavLink to="/myaccount/viewemail" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">View Email</NavLink>
               <NavLink to="/myaccount/changepassword" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Change Password</NavLink>
               <NavLink to="/myaccount/deleteaccount" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Delete Account</NavLink>
             </div>
@@ -68,11 +77,11 @@ class MyAccount extends Component {
           <div className="FormRight">
             <Route exact path="/myaccount" component={LogOut}>
             </Route>
-            <Route path="/myaccount/changename" component={ChangeName}>
+            <Route path="/myaccount/changename" render={(props) => (<ChangeName {...props} full_name={this.state.full_name}/>)}>
             </Route>
-            <Route path="/myaccount/changeaddress" component={ChangeAddress}>
+            <Route path="/myaccount/changeaddress" render={(props) => (<ChangeAddress {...props} address={this.state.address}/>)}>
             </Route>
-            <Route path="/myaccount/changeemail" component={ChangeEmail}>
+            <Route path="/myaccount/viewemail" render={(props) => (<ViewEmail {...props} email={this.state.email}/>)}>
             </Route>
             <Route path="/myaccount/changepassword" component={ChangePassword}>
             </Route>

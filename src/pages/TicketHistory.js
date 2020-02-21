@@ -20,9 +20,9 @@ class TicketHistory extends Component {
   }
 
   generateTickets() {
-    return axios.get("https://us-central1-maintenance-genie.cloudfunctions.net/api/tickets", {
+    return axios.get("https://us-central1-maintenance-genie.cloudfunctions.net/api/tenant_tickets", {
       headers: {
-        "Authorization": "Bearer " + window.localStorage.token,
+        "Authorization": "Bearer " + window.sessionStorage.token,
         "Content-Type": "application/json"
       }
     }).then((res) => {
@@ -42,14 +42,14 @@ class TicketHistory extends Component {
         </div>
         <div className="FormDual">
           <div className="FormChain">
-            {this.state.tickets.slice(0, 4).map((dat) => {
+            {this.state.tickets ? this.state.tickets.slice(0, 4).map((dat) => {
               let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nDESCRIPTION: " + dat.description + (dat.complete_time ? "\nCOMPLETED: " + dat.complete_time : "\nSUBMITTED: " + dat.submit_time);
               return (
                 <div key={dat.ticket_id} className="FormLink">
                   <textarea disabled value={tmp}></textarea>
                 </div>
               );
-            })}
+            }) : null}
           </div>
         </div>
       </div>

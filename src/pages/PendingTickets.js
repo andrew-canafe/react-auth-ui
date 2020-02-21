@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import pending from "./pending.png";
+import inprogress from "./inprogress.png";
+import resolved from "./resolved.png";
 
 class PendingTickets extends Component {
     constructor() {
@@ -21,9 +23,9 @@ class PendingTickets extends Component {
     }
 
     generateTickets() {
-        return axios.get("https://us-central1-maintenance-genie.cloudfunctions.net/api/tickets", {
+        return axios.get("https://us-central1-maintenance-genie.cloudfunctions.net/api/unassigned_tickets", {
             headers: {
-                "Authorization": "Bearer " + window.localStorage.token,
+                "Authorization": "Bearer " + window.sessionStorage.token,
                 "Content-Type": "application/json"
             }
         }).then((res) => {
@@ -43,16 +45,32 @@ class PendingTickets extends Component {
                 </div>
                 <div className="FormDual">
                     <div className="FormChain">
-                        {this.state.tickets.slice(0, 4).map((dat) => {
-                            let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nDESCRIPTION: " + dat.description + (dat.complete_time ? "\nCOMPLETED: " + dat.complete_time : "\nSUBMITTED: " + dat.submit_time);
+                        {this.state.tickets ? this.state.tickets.slice(0, 4).map((dat) => {
+                            let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nDESCRIPTION: " + dat.description + "\nSUBMITTED ON: " + dat.submit_time;
 
-                            return (
-                                <div key={dat.ticket_id} className="FormLink">
-                                    <button><img src={pending} alt="Pending"></img></button>
-                                    <textarea disabled value={tmp}></textarea>
-                                </div>
-                            );
-                        })}
+                            if (dat.is_closed) {
+                                return (
+                                    <div key={dat.ticket_id} className="FormLink">
+                                        <button><img src={resolved} alt="Resolved"></img></button>
+                                        <textarea disabled value={tmp}></textarea>
+                                    </div>
+                                );
+                            } else if (dat.is_assigned) {
+                                return (
+                                    <div key={dat.ticket_id} className="FormLink">
+                                        <button><img src={inprogress} alt="In Progress"></img></button>
+                                        <textarea disabled value={tmp}></textarea>
+                                    </div>
+                                );
+                            } else {
+                                return (
+                                    <div key={dat.ticket_id} className="FormLink">
+                                        <button><img src={pending} alt="Pending"></img></button>
+                                        <textarea disabled value={tmp}></textarea>
+                                    </div>
+                                );
+                            }
+                        }) : null}
                     </div>
                 </div>
             </div>

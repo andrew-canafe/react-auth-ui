@@ -6,8 +6,7 @@ class ChangeName extends Component {
     super();
 
     this.state = {
-      problem_type: "",
-      additional_instructions: ""
+      full_name: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -50,7 +49,7 @@ class ChangeName extends Component {
       <form onSubmit={this.handleSubmit} className="FormFields">
         <div className="FormField">
           <label className="FormField__Label" htmlFor="full_name">Full Name</label>
-          <input type="text" id="full_name" className="FormField__Input" placeholder="Enter your full name" name="full_name" value={this.state.name} onChange={this.handleChange} />
+          <input type="text" id="full_name" className="FormField__Input" placeholder="Enter your full name" name="full_name" defaultValue={this.props.full_name ? this.props.full_name : ""} onChange={this.handleChange} />
         </div>
 
         <div className="FormFieldCenter">
