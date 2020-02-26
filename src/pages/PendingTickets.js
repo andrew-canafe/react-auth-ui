@@ -85,7 +85,7 @@ class PendingTickets extends Component {
                 </div>
                 <div className="FormDual">
                     <div className="FormChain">
-                        {this.state.tickets ? this.state.tickets.map((dat) => {
+                        {Array.isArray(this.state.tickets) ? this.state.tickets.map((dat) => {
                             if (dat && dat.ticket_id) {
                                 let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nDESCRIPTION: " + dat.description + "\nSUBMITTED ON: " + dat.submit_time;
                                 return (

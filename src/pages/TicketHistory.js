@@ -45,7 +45,7 @@ class TicketHistory extends Component {
         </div>
         <div className="FormDual">
           <div className="FormChain">
-            {this.state.tickets ? this.state.tickets.map((dat) => {
+            {Array.isArray(this.state.tickets) ? this.state.tickets.map((dat) => {
               if (dat && dat.ticket_id) {
                 let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nDESCRIPTION: " + dat.description + (dat.complete_time ? "\nCOMPLETED: " + dat.complete_time : "\nSUBMITTED: " + dat.submit_time);
                 if (dat.is_closed) {

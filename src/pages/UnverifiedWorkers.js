@@ -83,7 +83,7 @@ class UnverifiedWorkers extends Component {
                 </div>
                 <div className="FormDual">
                     <div className="FormChain">
-                        {this.state.users ? this.state.users.map((dat) => {
+                        {Array.isArray(this.state.users) ? this.state.users.map((dat) => {
                             if (dat) {
                                 let tmp = "NAME: " + dat.full_name + "\nADDRESS: " + dat.address + "\nEMAIL: " + dat.email + "\nCREATED ON: " + dat.created_at;
 
